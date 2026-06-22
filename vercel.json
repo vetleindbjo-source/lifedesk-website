@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/app", "destination": "https://www.lifedesk.no/app", "permanent": false },
+    { "source": "/app/:path*", "destination": "https://www.lifedesk.no/app/:path*", "permanent": false }
+  ]
+}
