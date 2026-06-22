@@ -3,87 +3,464 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LifeDesk — your life, on one desk</title>
-  <meta name="description" content="Budget, tasks, calendar, and a chat that files everything where it belongs. Web, desktop, and iPhone." />
+  <title>LifeDesk — your whole life, on one desk</title>
+  <meta name="description" content="Budget, tasks, calendar, and a chat that files everything where it belongs — in Norwegian or English. Web, desktop, and iPhone." />
+  <meta property="og:title" content="LifeDesk — your whole life, on one desk" />
+  <meta property="og:description" content="Write anything in plain language and LifeDesk files it where it belongs. Budget, tasks, calendar, chat." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#F3EEE3" />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+  <script>try{matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
   <style>
-    :root{ --bg:#F3EEE3; --panel:#FBF8F1; --ink:#211C16; --muted:#786C5C; --line:rgba(33,28,22,.16); --accent:#8C2F23; --serif:'Fraunces',Georgia,serif; --body:'Newsreader',Georgia,serif; }
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    body{ background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.6; -webkit-font-smoothing:antialiased; }
-    .wrap{ max-width:780px; margin:0 auto; padding:28px 24px 64px; }
-    header{ display:flex; align-items:center; gap:10px; }
-    .mark{ width:30px; height:30px; }
-    .brand{ font-family:var(--serif); font-weight:600; font-size:20px; letter-spacing:.01em; }
-    .hero{ margin-top:64px; }
-    h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,7vw,60px); line-height:1.04; letter-spacing:-.01em; }
-    .lead{ margin-top:20px; font-size:20px; color:var(--ink); max-width:34ch; }
-    .cta{ margin-top:34px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
-    .btn{ display:inline-flex; align-items:center; gap:9px; padding:13px 20px; border-radius:12px; font-family:var(--body); font-size:17px; text-decoration:none; border:1px solid var(--ink); cursor:pointer; }
-    .btn.primary{ background:var(--accent); border-color:var(--accent); color:var(--bg); }
-    .btn.primary:hover{ background:#7a281e; }
-    .btn.ghost{ background:var(--panel); color:var(--ink); }
-    .btn.ghost:hover{ border-color:var(--accent); color:var(--accent); }
-    .btn svg{ width:18px; height:18px; }
-    section.block{ margin-top:64px; border-top:1px solid var(--line); padding-top:34px; }
-    .eyebrow{ font-family:var(--serif); text-transform:uppercase; letter-spacing:.08em; font-size:12px; color:var(--muted); }
-    .grid{ margin-top:22px; display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .feat h3{ font-family:var(--serif); font-weight:600; font-size:18px; margin-bottom:5px; }
-    .feat p{ color:var(--muted); font-size:16px; }
-    .downloads{ margin-top:20px; display:flex; flex-wrap:wrap; gap:14px; }
-    footer{ margin-top:64px; border-top:1px solid var(--line); padding-top:22px; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-    a.q{ color:var(--accent); text-decoration:none; }
+:root {
+  --paper:        #F3EEE3;
+  --paper-2:      #EAE3D4;
+  --panel:        #FBF8F1;
+  --ink:          #211C16;
+  --muted:        #786C5C;
+  --oxblood:      #8C2F23;
+  --oxblood-soft: rgba(140, 47, 35, 0.10);
+  --line:         rgba(33, 28, 22, 0.16);
+  --line-soft:    rgba(33, 28, 22, 0.09);
+  --hard:         #211C16;
+  --green:        #3F7A50;
+  --red:          #A6392A;
+  --riso-terracotta: #C75D3F;
+  --riso-sky:        #4E83C7;
+  --riso-mint:       #2FA079;
+  --surface-page:   var(--paper);
+  --surface-sunken: var(--paper-2);
+  --surface-card:   var(--panel);
+  --text-body:      var(--ink);
+  --text-muted:     var(--muted);
+  --text-on-accent: var(--paper);
+  --accent:         var(--oxblood);
+  --accent-soft:    var(--oxblood-soft);
+  --border-hairline: var(--line);
+  --border-soft:     var(--line-soft);
+}
+:root[data-theme="dark"] {
+  --paper:        #1B1814;
+  --paper-2:      #262019;
+  --panel:        #25201A;
+  --ink:          #ECE4D5;
+  --muted:        #9C9082;
+  --oxblood:      #E0795A;
+  --oxblood-soft: rgba(224, 121, 90, 0.14);
+  --line:         rgba(236, 228, 213, 0.15);
+  --line-soft:    rgba(236, 228, 213, 0.08);
+  --hard:         #0E0C09;
+  --green:        #74C28C;
+  --red:          #E0795A;
+  --riso-terracotta: #E0795A;
+  --riso-sky:        #6BA0E0;
+  --riso-mint:       #4FBE96;
+}
+:root {
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:    'Newsreader', Georgia, serif;
+  --serif: var(--font-display);
+  --body:  var(--font-body);
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold: 600;
+  --fw-bold:    700;
+  --text-hero:    clamp(38px, 7vw, 60px);
+  --text-title:   34px;
+  --text-h2:      30px;
+  --text-h3:      19px;
+  --text-eyebrow: 12px;
+  --text-lead:    20px;
+  --text-base:    16px;
+  --text-sm:      15px;
+  --text-xs:      13px;
+  --lh-tight:   1.04;
+  --lh-snug:    1.2;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.6;
+  --tracking-tight:   -0.02em;
+  --tracking-snug:    -0.01em;
+  --tracking-eyebrow:  0.08em;
+  --nums-ledger: oldstyle-nums tabular-nums;
+}
+:root {
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --measure-app:  720px;
+  --measure-chat: 760px;
+  --measure-page: 780px;
+  --radius-sm:   8px;
+  --radius-md:   9px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 999px;
+  --border-hairline-w: 1px;
+  --border-riso-w:     2px;
+  --shadow-pop:   0 8px 24px rgba(33, 28, 22, 0.12);
+  --shadow-soft:  0 1px 2px rgba(33, 28, 22, 0.05);
+  --shadow-riso:  4px 4px 0 var(--hard);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.45;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-snug);
+}
+a { color: var(--accent); }
+.muted { color: var(--text-muted); }
+.num { font-variant-numeric: var(--nums-ledger); }
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-size: var(--text-eyebrow);
+  color: var(--text-muted);
+}
+.site { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+section[id] { scroll-margin-top: 80px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 9px; justify-content: center;
+  font-family: var(--font-body); font-weight: 600; font-size: 17px; line-height: 1;
+  padding: 13px 22px; border-radius: var(--radius-md); text-decoration: none;
+  cursor: pointer; white-space: nowrap; transition: filter .12s, transform .1s, border-color .12s, color .12s;
+}
+.btn:active { transform: scale(0.985); }
+.btn svg { width: 18px; height: 18px; }
+.btn-primary { background: var(--accent); color: var(--text-on-accent); border: 1px solid var(--accent); }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-ghost { background: var(--panel); color: var(--ink); border: 1px solid var(--line); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-sm { padding: 9px 15px; font-size: 15px; }
+.btn-lg { padding: 15px 24px; }
+.dl-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
+.dl-text small { font-weight: 400; font-size: 12px; color: var(--muted); }
+.btn-ghost:hover .dl-text small { color: inherit; }
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 0 18px; position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand img { width: 30px; height: 30px; border-radius: 7px; }
+.brand span { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 16px; transition: color .12s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.btn { color: var(--text-on-accent); }
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  padding: 72px 0 48px;
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 5.4vw, 68px); line-height: 1.02; letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+.hero .lead { font-size: 20px; line-height: 1.55; margin-top: 22px; max-width: 38ch; color: var(--ink); }
+.hero .lead em { font-style: italic; color: var(--accent); }
+.cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+.preview { perspective: 1600px; }
+.win {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 24px 60px -20px rgba(33, 28, 22, 0.32), 0 4px 12px rgba(33, 28, 22, 0.08);
+  overflow: hidden; transform: rotateY(-3deg) rotateX(2deg); transform-style: preserve-3d;
+}
+.win-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line-soft); background: var(--paper-2); }
+.win-bar > span { width: 11px; height: 11px; border-radius: 50%; background: var(--line); }
+.win-bar > span:first-child { background: #C77B6E; }
+.win-host { margin-left: 12px; font-size: 12px; color: var(--muted); font-variant-numeric: var(--nums-ledger); }
+.win-body { display: flex; height: 372px; }
+.mini-side { width: 56px; background: var(--panel); border-right: 1px solid var(--line-soft); padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.mini-brand img { width: 26px; height: 26px; border-radius: 6px; }
+.mini-nav { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.mini-nav span { color: var(--muted); display: inline-flex; }
+.mini-nav span svg { width: 19px; height: 19px; }
+.mini-nav span.on { color: var(--accent); }
+.mini-main { flex: 1; padding: 20px 22px; display: flex; flex-direction: column; gap: 13px; min-width: 0; }
+.mini-hi { font-family: var(--font-display); font-size: 20px; font-weight: 500; }
+.mini-thread { display: flex; flex-direction: column; gap: 8px; }
+.mb { font-size: 13px; line-height: 1.45; padding: 8px 12px; max-width: 84%; }
+.mb.user { align-self: flex-end; background: var(--ink); color: var(--paper); border-radius: 13px 13px 3px 13px; }
+.mb.bot { align-self: flex-start; background: var(--paper-2); border: 1px solid var(--line-soft); border-radius: 13px 13px 13px 3px; display: inline-flex; align-items: center; gap: 6px; }
+.mb.bot svg { width: 13px; height: 13px; flex-shrink: 0; }
+.mini-buckets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: auto; }
+.mb-card { background: var(--panel); border: 2px solid var(--ink); border-radius: 11px; box-shadow: 3px 3px 0 var(--hard); padding: 9px 10px; }
+.mb-top { font-family: var(--font-display); font-weight: 600; font-size: 11px; }
+.mb-track { height: 8px; background: var(--paper-2); border: 1.2px solid var(--ink); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+.mb-track i { display: block; height: 100%; border-radius: 999px; }
+.mb-card.nec .mb-track i { background: var(--riso-terracotta); }
+.mb-card.fun .mb-track i { background: var(--riso-sky); }
+.mb-card.sav .mb-track i { background: var(--riso-mint); }
+.block, .budget-feature, .download, .trust { padding: 60px 0; border-top: 1px solid var(--line); }
+.block-head { max-width: 620px; }
+.block-head.center { margin: 0 auto; text-align: center; }
+.block-head h2, .bf-copy h2 {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.1; letter-spacing: -0.015em; margin-top: 12px;
+}
+.feat-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.feat-ic { display: inline-flex; color: var(--accent); }
+.feat-ic svg { width: 26px; height: 26px; }
+.feat h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; margin: 14px 0 7px; }
+.feat p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+.budget-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.bf-copy p { margin-top: 18px; font-size: 18px; line-height: 1.6; color: var(--ink); max-width: 42ch; }
+.bf-copy p em { font-style: italic; color: var(--accent); }
+.bf-list { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+.bf-list li { display: flex; align-items: center; gap: 11px; font-size: 16px; }
+.bf-list li svg { width: 19px; height: 19px; color: var(--accent); flex-shrink: 0; }
+.bf-cards { display: flex; flex-direction: column; gap: 18px; }
+.riso { background: var(--panel); border: 2px solid var(--ink); border-radius: var(--radius-xl); box-shadow: var(--shadow-riso); padding: 18px 20px; }
+.riso-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.riso-label { font-family: var(--font-display); font-weight: 600; font-size: 19px; }
+.riso-amt { font-size: 14px; white-space: nowrap; }
+.riso-track { height: 14px; background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; margin: 14px 0 10px; }
+.riso-track i { display: block; height: 100%; border-radius: 999px; }
+.riso.nec .riso-track i { background: var(--riso-terracotta); }
+.riso.fun .riso-track i { background: var(--riso-sky); }
+.riso.sav .riso-track i { background: var(--riso-mint); }
+.riso-foot { font-size: 14px; font-weight: 600; color: var(--muted); }
+.dl-row { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.dl-note { margin-top: 22px; text-align: center; font-size: 14px; color: var(--muted); max-width: 60ch; margin-left: auto; margin-right: auto; }
+.trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.trust-item h4 { font-family: var(--font-display); font-weight: 600; font-size: 18px; margin-bottom: 8px; }
+.trust-item p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+.foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 30px 0 50px; border-top: 1px solid var(--line); color: var(--muted); }
+.foot-brand { display: flex; align-items: center; gap: 9px; }
+.foot-brand img { width: 24px; height: 24px; border-radius: 6px; }
+.foot-brand span { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--ink); }
+.foot-links { display: flex; gap: 20px; align-items: center; font-size: 14px; }
+.foot-links a { color: var(--accent); text-decoration: none; }
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 44px 0 32px; }
+  .preview { order: 2; }
+  .win { transform: none; }
+  .budget-feature { grid-template-columns: 1fr; gap: 36px; }
+  .feat-grid { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  .trust { grid-template-columns: 1fr; gap: 28px; }
+  .nav-links { gap: 16px; }
+  .nav-links a:not(.btn) { display: none; }
+}
+@media (max-width: 520px) {
+  .site { padding: 0 20px; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .dl-row { flex-direction: column; }
+  .dl-row .btn { width: 100%; }
+}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#E8DCC4"/><g fill="#1A1714"><rect x="168" y="120" width="176" height="128" rx="18"/><rect x="244" y="248" width="24" height="20"/><rect x="214" y="268" width="84" height="12" rx="6"/><rect x="100" y="280" width="312" height="18" rx="9"/><rect x="124" y="298" width="18" height="96" rx="4"/><rect x="370" y="298" width="18" height="96" rx="4"/></g><rect x="186" y="138" width="140" height="92" rx="8" fill="#E8DCC4"/></svg>
-      <span class="brand">LifeDesk</span>
+  <div class="site">
+
+    <!-- Header -->
+    <header class="nav">
+      <a class="brand" href="#top">
+        <img src="/icon.svg" alt="">
+        <span>LifeDesk</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#budget">Budget</a>
+        <a href="#download">Download</a>
+        <a class="btn btn-primary btn-sm" href="https://www.lifedesk.no/app">Open the web app</a>
+      </nav>
     </header>
 
-    <div class="hero">
-      <h1>Your whole life, on one desk.</h1>
-      <p class="lead">Budget, tasks, and calendar — plus a chat that files everything where it belongs. In Norwegian or English.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://www.lifedesk.no/app">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <div class="eyebrow">Budget · Tasks · Calendar · Chat</div>
+        <h1>Your whole life,<br>on one desk.</h1>
+        <p class="lead">A calm home for the moving parts of a life. Write anything in plain language — <em>“brukte 200 på Kiwi”</em> — and LifeDesk files it where it belongs. No forms, no friction.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://www.lifedesk.no/app">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+            Open the web app
+          </a>
+          <a class="btn btn-ghost" href="#download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"></path><path d="M7 11l5 5 5-5"></path><path d="M5 20h14"></path></svg>
+            Download for desktop
+          </a>
+        </div>
+        <div class="hero-note">Norwegian or English · Free while in early release</div>
+      </div>
+
+      <!-- App preview -->
+      <div class="preview" aria-hidden="true">
+        <div class="win">
+          <div class="win-bar"><span></span><span></span><span></span><div class="win-host">app.lifedesk.no</div></div>
+          <div class="win-body">
+            <aside class="mini-side">
+              <div class="mini-brand"><img src="/icon.svg" alt=""></div>
+              <div class="mini-nav">
+                <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v9h14v-9"></path></svg></span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10.5h18"></path><circle cx="16.5" cy="14" r="1.1"></circle></svg></span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="9.5" r="5"></circle><circle cx="15" cy="15" r="5"></circle></svg></span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M4 9.5h16"></path><path d="M8.5 3v4"></path><path d="M15.5 3v4"></path></svg></span>
+              </div>
+            </aside>
+            <div class="mini-main">
+              <div class="mini-hi">Good morning</div>
+              <div class="mini-thread">
+                <div class="mb user">brukte 250 på Kiwi</div>
+                <div class="mb bot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13"></path><path d="M6 12l6 6 6-6"></path></svg>Logged kr 250 · Kiwi → Food.</div>
+                <div class="mb user">how's my budget?</div>
+              </div>
+              <div class="mini-buckets">
+                <div class="mb-card nec"><div class="mb-top">Necessities</div><div class="mb-track"><i style="width:72%"></i></div></div>
+                <div class="mb-card fun"><div class="mb-top">Fun</div><div class="mb-track"><i style="width:48%"></i></div></div>
+                <div class="mb-card sav"><div class="mb-top">Savings</div><div class="mb-track"><i style="width:60%"></i></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="block" id="features">
+      <div class="block-head">
+        <div class="eyebrow">What it does</div>
+        <h2>One desk for everything you keep in your head.</h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0"></path><path d="M12 17.5V21"></path></svg></span>
+          <h3>Just write it</h3>
+          <p>“brukte 200 på kiwi”, “ring tannlegen fredag”, “fikk 42000 i lønn” — it lands in the right bucket, list, or calendar. No forms.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10.5h18"></path><circle cx="16.5" cy="14" r="1.1"></circle></svg></span>
+          <h3>A budget that holds</h3>
+          <p>Necessities are funded first, then the rest splits your way. Rename the buckets — “Fuck you money” if you like.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8.5h6"></path><path d="M9 12.5h6"></path><path d="M9 16.5h4"></path></svg></span>
+          <h3>It checks in</h3>
+          <p>Quiet weekly and monthly summaries, waiting for you when you open it. Never a notification you didn't ask for.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></span>
+          <h3>Everywhere</h3>
+          <p>Web, desktop, and iPhone. Your data follows your account, in Norwegian or English — switch any time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Budget highlight -->
+    <section class="budget-feature" id="budget">
+      <div class="bf-copy">
+        <div class="eyebrow">The budget</div>
+        <h2>Three buckets. Necessities first.</h2>
+        <p>Log your income once and LifeDesk funds your fixed costs, then splits whatever's left between <em>Fun</em> and <em>Savings</em> on your terms. The bars show exactly where the month stands — at a glance, set like a ledger.</p>
+        <ul class="bf-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg> Fixed costs come off the top, automatically</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg> A savings floor protects tight months</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg> Rename the buckets to whatever fits your life</li>
+        </ul>
+      </div>
+      <div class="bf-cards">
+        <div class="riso nec">
+          <div class="riso-top"><span class="riso-label">Necessities</span><span class="riso-amt num">kr 13 000 <span class="muted">/ 18 000</span></span></div>
+          <div class="riso-track"><i style="width:72%"></i></div>
+          <div class="riso-foot">kr 5 000 left</div>
+        </div>
+        <div class="riso fun">
+          <div class="riso-top"><span class="riso-label">Fun</span><span class="riso-amt num">kr 2 900 <span class="muted">/ 6 000</span></span></div>
+          <div class="riso-track"><i style="width:48%"></i></div>
+          <div class="riso-foot">kr 3 100 left</div>
+        </div>
+        <div class="riso sav">
+          <div class="riso-top"><span class="riso-label">Savings</span><span class="riso-amt num">kr 4 000 <span class="muted">/ 6 000</span></span></div>
+          <div class="riso-track"><i style="width:60%"></i></div>
+          <div class="riso-foot">kr 2 000 to go</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download -->
+    <section class="download" id="download">
+      <div class="block-head center">
+        <div class="eyebrow">Get LifeDesk</div>
+        <h2>Open it in a tab, or keep it on your desk.</h2>
+      </div>
+      <div class="dl-row">
+        <a class="btn btn-primary btn-lg" href="https://www.lifedesk.no/app">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
           Open the web app
         </a>
-      </div>
-    </div>
-
-    <section class="block">
-      <div class="eyebrow">Desktop app</div>
-      <div class="downloads">
-        <a class="btn ghost" href="https://github.com/vetleindbjo-source/lifedesk-app/releases/download/v0.1.0/LifeDesk_0.1.0_x64-setup.exe">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.4l8-1.1v7.2H3zM12 4.1L21 3v8.6h-9zM3 12.5h8v7.2l-8-1.1zM12 12.5h9V21l-9-1.2z"/></svg>
-          Download for Windows
+        <a class="btn btn-ghost btn-lg" href="https://github.com/vetleindbjo-source/lifedesk-app/releases/download/v0.1.0/LifeDesk_0.1.0_x64-setup.exe">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.4l8-1.1v7.2H3zM12 4.1L21 3v8.6h-9zM3 12.5h8v7.2l-8-1.1zM12 12.5h9V21l-9-1.2z"></path></svg>
+          <span class="dl-text">Download for Windows<small>.exe · 64-bit</small></span>
         </a>
-        <a class="btn ghost" href="https://github.com/vetleindbjo-source/lifedesk-app/releases/download/v0.1.0/LifeDesk_0.1.0_universal.dmg">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.8c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .6 1 1.4 2.1 2.4 2 1-.1 1.3-.7 2.5-.7s1.5.7 2.6.6c1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.4-.9-2.4-3zM14.5 6.3c.5-.7.9-1.6.8-2.6-.8 0-1.8.6-2.4 1.3-.5.6-1 1.5-.8 2.5.9.1 1.8-.5 2.4-1.2z"/></svg>
-          Download for macOS
+        <a class="btn btn-ghost btn-lg" href="https://github.com/vetleindbjo-source/lifedesk-app/releases/download/v0.1.0/LifeDesk_0.1.0_universal.dmg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.8c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .6 1 1.4 2.1 2.4 2 1-.1 1.3-.7 2.5-.7s1.5.7 2.6.6c1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.4-.9-2.4-3zM14.5 6.3c.5-.7.9-1.6.8-2.6-.8 0-1.8.6-2.4 1.3-.5.6-1 1.5-.8 2.5.9.1 1.8-.5 2.4-1.2z"></path></svg>
+          <span class="dl-text">Download for macOS<small>.dmg · universal</small></span>
         </a>
       </div>
-      <p style="margin-top:12px;font-size:13px;color:var(--muted)">Early release — your system may warn it's from an unidentified developer for now. Signed builds are on the way.</p>
+      <p class="dl-note">Early release — your system may warn it's from an unidentified developer for now. Signed builds are on the way. iPhone via the web app (add to Home Screen).</p>
     </section>
 
-    <section class="block">
-      <div class="eyebrow">What it does</div>
-      <div class="grid">
-        <div class="feat"><h3>Just write it</h3><p>"brukte 200 på kiwi" — it lands in the right budget bucket, no forms.</p></div>
-        <div class="feat"><h3>A budget that holds</h3><p>Necessities first, then the rest splits your way. Rename the buckets — "Fuck you money" if you like.</p></div>
-        <div class="feat"><h3>It checks in</h3><p>Quiet weekly and monthly summaries, waiting for you when you open it.</p></div>
-        <div class="feat"><h3>Everywhere</h3><p>Web, desktop, and iPhone — your data follows your account.</p></div>
+    <!-- Trust -->
+    <section class="trust">
+      <div class="trust-item">
+        <h4>Yours, and quiet about it</h4>
+        <p>Your data follows your account and nothing else. No ads, no selling, no feed. LifeDesk only ever shows you what you put in.</p>
+      </div>
+      <div class="trust-item">
+        <h4>Bilingual by design</h4>
+        <p>Write in Norwegian or English, mix them mid-sentence — “invited to bursdag 17. juli kl 19” parses just fine. Currency in kr.</p>
+      </div>
+      <div class="trust-item">
+        <h4>You're in control</h4>
+        <p>It learns durable facts to be useful, and you can read and delete any of them. Pick a tone: warm, plain, or coach.</p>
       </div>
     </section>
 
-    <footer>
-      <span>LifeDesk · lifedesk.no</span>
-      <span>Already have an account? <a class="q" href="https://www.lifedesk.no/app">Open the app</a></span>
+    <!-- Footer -->
+    <footer class="foot">
+      <div class="foot-brand"><img src="/icon.svg" alt=""><span>LifeDesk</span></div>
+      <div class="foot-links">
+        <span>lifedesk.no</span>
+        <a href="https://www.lifedesk.no/app">Open the app</a>
+      </div>
     </footer>
+
   </div>
 </body>
 </html>
